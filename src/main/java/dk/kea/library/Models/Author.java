@@ -1,5 +1,6 @@
 package dk.kea.library.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,6 +16,13 @@ public class Author {
     private String name;
 
     private LocalDate dateOfBirth;
+
+
+    /*@JsonIgnore
+    @ManyToMany(
+            mappedBy = "authors"
+    )*/
+
 
     @ManyToMany()
     @JoinTable(

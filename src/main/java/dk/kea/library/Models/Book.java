@@ -1,10 +1,11 @@
 package dk.kea.library.Models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -16,6 +17,30 @@ public class Book {
     private String title;
 
     private int price;
+
+
+
+
+    /*@ManyToMany()
+    @JoinTable(
+            name = "authors_books",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )*/
+    @JsonIgnore
+    @ManyToMany(
+            mappedBy = "books"
+    )
+    private Set<Author> authors = new HashSet<>();
+
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
 
     public Long getId() {
         return id;
